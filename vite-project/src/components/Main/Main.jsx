@@ -15,7 +15,7 @@ function Main({ cardList, isLoaded }) {
                 <div className="main__block">
                     <div className="main__content">
                         {
-                            isLoaded ? "loading..." : statusList.map((status) => (
+                            isLoaded ? "Loading..." : statusList.map((status) => (
                                 <Column
                                     key={status}
                                     name={status}
