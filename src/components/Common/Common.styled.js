@@ -16,12 +16,12 @@ export const Button = styled.button`
     height: 30px;
    
 
-    background-color: ${props => props.$transparent ? 'transparent' : '#565EEF'};
-    color: ${props => props.$transparent ? '#565EEF' : '#FFFFFF'};
+    background-color: ${(col) => {col.$transparent ? 'transparent' : '#565EEF'}};
+    color: ${(col) => {col.$transparent ? '#565EEF' : '#FFFFFF'}};
 
     border-radius: 4px;
 
-    border: ${props => props.$transparent ? '0.7px solid var(--palette-navy-60, #565EEF)' : 'none'};;
+    border: ${(col) => {col.$transparent ? '0.7px solid var(--palette-navy-60, #565EEF)' : 'none'}};;
 
     font-size: 14px;
     line-height: 1;
@@ -31,7 +31,7 @@ export const Button = styled.button`
 
 
     &:hover {
-        background-color: ${props => props.$transparent ? '#33399b' : '#33399b'};
+        background-color: ${(col) => {col.$transparent ? '#33399b' : '#33399b'}};
         color: #FFFFFF;
     }`
 
