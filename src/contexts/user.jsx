@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
         
         setUserData(user);
         localStorage.setItem('user', JSON.stringify(user));
-        navigate(AppRoutes.MAIN)
+        navigate(AppRoutes.LOGIN)
     }
 
     const logoutUser = () => {

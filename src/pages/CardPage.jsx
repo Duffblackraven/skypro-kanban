@@ -3,17 +3,24 @@ import { AppRoutes } from "../lib/appRoutes";
 
 import { deleteTask, getTasks } from "../api";
 import { useUser } from "../hooks/useUser";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TasksContext } from "../contexts/tasks.jsx";
 import { useTasks } from "../hooks/useTasks.jsx";
+
+// import Calendar from "../Calendar/Calendar"
 
 
 function CardBrowsePage() {
 
     const { userData } = useUser();
-    const { returnUserTasks } = useTasks();
-    const { setUserTasks } = useContext(TasksContext);
+    // const [selected, setSelected] = useState();
 
+    const { returnUserTasks } = useTasks();
+    const { userTasks, setUserTasks } = useContext(TasksContext);
+
+
+    // const currentCard = userTasks?.find((el) => el._id === id);
+    
     console.log(userData);
     console.log("user token: " + userData.token);
     console.log("user id: " + userData._id);
@@ -21,9 +28,10 @@ function CardBrowsePage() {
     let { id } = useParams();
     console.log("card id: " + id);
 
+    // const currentCard = userTasks.find((el) => el._id === id);
+
     const deleteCard = async () => {
 
-        console.log('deleting card');
 
         await deleteTask({ token: userData.token, id })
 
@@ -35,7 +43,7 @@ function CardBrowsePage() {
                 returnUserTasks();
             })
             .catch(() => {
-                throw new Error('Something went wrong');
+                throw new Error('Что-то пошло не так');
             });
     };
 
@@ -44,28 +52,29 @@ function CardBrowsePage() {
             <div className="pop-browse__block">
                 <div className="pop-browse__content">
                     <div className="pop-browse__top-block">
-                        <h3 className="pop-browse__ttl">Task name {id}</h3>
+                        <h3 className="pop-browse__ttl">Название задачи {id}</h3>
+                        {/* <h3 className="pop-browse__ttl">{currentCard?.title}</h3> */}
                         <div className="categories__theme theme-top _orange _active-category">
                             <p className="_orange">Web Design</p>
                         </div>
                     </div>
                     <div className="pop-browse__status status">
-                        <p className="status__p subttl">Status</p>
+                        <p className="status__p subttl">Статус</p>
                         <div className="status__themes">
                             <div className="status__theme _hide">
-                                <p>No status</p>
+                                <p>Без статуса</p>
                             </div>
                             <div className="status__theme _gray">
-                                <p className="_gray">To do</p>
+                                <p className="_gray">Нужно сделать</p>
                             </div>
                             <div className="status__theme _hide">
-                                <p>In process</p>
+                                <p>В работе</p>
                             </div>
                             <div className="status__theme _hide">
-                                <p>Testing</p>
+                                <p>Тестирование</p>
                             </div>
                             <div className="status__theme _hide">
-                                <p>Ready</p>
+                                <p>Готово</p>
                             </div>
                         </div>
                     </div>
@@ -77,19 +86,19 @@ function CardBrowsePage() {
                         >
                             <div className="form-browse__block">
                                 <label htmlFor="textArea01" className="subttl">
-                                    Task description
+                                Описание задачи
                                 </label>
                                 <textarea
                                     className="form-browse__area"
                                     name="text"
                                     id="textArea01"
                                     readOnly=""
-                                    placeholder="Enter task description..."
-                                    defaultValue={""}
+                                    placeholder="Введите описание задачи..."
+                                    // disabled={!isEditing}
                                 />
                             </div>
                         </form>
-
+                        {/* <Calendar selected={selected} readOnly /> */}
 
                         <div className="pop-new-card__calendar calendar">
                             <p className="calendar__ttl subttl">Dates</p>
@@ -189,7 +198,7 @@ function CardBrowsePage() {
 
                     </div>
                     <div className="theme-down__categories theme-down">
-                        <p className="categories__p subttl">Category</p>
+                        <p className="categories__p subttl">Категория</p>
                         <div className="categories__theme _orange _active-category">
                             <p className="_orange">Web Design</p>
                         </div>

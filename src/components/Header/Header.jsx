@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Button } from "../Common/Common.styled";
+import { Container } from "../Common/Common.styled";
 import { HeaderBox, HeaderBlock, HeaderNav, HeaderBtnMainNew } from "./Header.styled";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
@@ -49,10 +49,9 @@ function Header({ userData }) {
                             <input type="checkbox" className="checkbox" name="checkbox" onClick={toggleTheme} />
                         </div> */}
 
-                            <Link to={AppRoutes.EXIT}>
-                                <Button $transparent>Выйти</Button>
-                            </Link>
-
+                            <button type="button" className="_hover03">
+                                    <Link to={AppRoutes.EXIT}>Выйти</Link>
+                                </button>
                         </div>
                     }
 
