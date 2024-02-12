@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Button } from "../Common/Common.styled";
-import { HeaderBox, HeaderBlock, HeaderNav } from "./Header.styled";
+import { HeaderBox, HeaderBlock, HeaderNav, HeaderBtnMainNew } from "./Header.styled";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
 
@@ -28,7 +28,8 @@ function Header({ userData }) {
                 <HeaderNav>
 
                     <Link to={AppRoutes.ADD_CARD}>
-                        <Button id="btnMainNew">Создать новую задачу</Button>
+                        {/* <Button id="btnMainNew">Создать новую задачу</Button>  */}
+                        <HeaderBtnMainNew>Создать новую задачу</HeaderBtnMainNew>
                     </Link>
 
                     <a href="#user-set-target" className="header__user _hover02" onClick={togglePopUp}>

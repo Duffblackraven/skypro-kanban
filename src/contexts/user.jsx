@@ -6,8 +6,8 @@ export const UserContext = createContext(null);
 
 const getUserFromLocalStorage = () => {
     try {
-        return JSON.parse(localStorage.getItem('user'))
-        // return JSON.parse(localStorage.getItem('user')) || { token: '' }
+        // return JSON.parse(localStorage.getItem('user'))
+        return JSON.parse(localStorage.getItem('user')) || { token: '' }
     } catch {
         return null
     }
