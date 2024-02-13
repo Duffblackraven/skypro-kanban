@@ -685,7 +685,7 @@ body {
 .status__theme {
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  color: #94A6BE;
+  /* color: #94A6BE; */
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;

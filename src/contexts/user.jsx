@@ -7,7 +7,7 @@ export const UserContext = createContext(null);
 const getUserFromLocalStorage = () => {
     try {
         // return JSON.parse(localStorage.getItem('user'))
-        return JSON.parse(localStorage.getItem('user')) || { token: '' }
+        return JSON.parse(localStorage.getItem('user'))
     } catch {
         return null
     }
@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
         
         setUserData(user);
         localStorage.setItem('user', JSON.stringify(user));
-        navigate(AppRoutes.LOGIN)
+        navigate(AppRoutes.MAIN)
     }
 
     const logoutUser = () => {

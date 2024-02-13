@@ -9,7 +9,7 @@ function Column({ title, cardList }) {
         </ColumnTitle>
         <ColumnCards>
 
-            {cardList.map((card) => (
+            {cardList?.map((card) => (
                 <Card
                     id={card._id}
                     title={card.title}
