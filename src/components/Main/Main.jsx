@@ -2,7 +2,7 @@ import { Container } from '../Common/Common.styled';
 import { MainBox, MainBlock, MainContent } from './Main.styled';
 import Column from '../Column/Column';
 
-const statusList = [
+export const statusList = [
     "Без статуса",
     "Нужно сделать",
     "В работе",

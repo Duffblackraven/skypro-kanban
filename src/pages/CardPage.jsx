@@ -8,6 +8,7 @@ import { TasksContext } from "../contexts/tasks.jsx";
 import { useTasks } from "../hooks/useTasks.jsx";
 import { Calendar } from "../components/Calendar/Calendar.jsx";
 import { FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseWrap, PopBrowseWrapper } from "./CardPage.styled.js";
+import { statusList } from "../components/Main/Main.jsx";
 
 
 function CardBrowsePage() {
@@ -22,8 +23,8 @@ function CardBrowsePage() {
     let { id } = useParams();
     const currentCard = userTasks?.find((el) => el._id === id);
 
-    console.log(currentCard);
-    console.log(userTasks);
+    // console.log(currentCard);
+    // console.log(userTasks);
 
     const deleteCard = async () => {
 
@@ -40,19 +41,22 @@ function CardBrowsePage() {
             });
     };
 
+    const [currentStatus, setCurrentStatus] = useState(currentCard?.status || '');
+
     const [isEditing, setIsEditing] = useState(false);
 
     const startEditing = () => {
         setIsEditing(true);
     };
     const cancelEditing = () => {
+        setCurrentStatus(currentCard?.status || '')
         setIsEditing(false)
     };
 
     const [editedTask, setEditedTask] = useState({
-        title: '',
-        topic: '',
-        description: '',
+        title: currentCard?.title || '',
+        topic: currentCard?.topic || '',
+        description: currentCard?.description || '',
     });
 
     const handleInputChange = (e) => {
@@ -68,11 +72,11 @@ function CardBrowsePage() {
     const editCard = async () => {
 
         let newCard = {
-            ...editedTask, data: selected
+            ...editedTask, date: selected, status: currentStatus 
         }
         console.log(newCard);
 
-        await editTask({ token: userData.token, id, taskData: editedTask })
+        await editTask({ token: userData.token, id, taskData: newCard })
 
         getTasks({ token: userData.token })
             .then((data) => {
@@ -101,21 +105,30 @@ function CardBrowsePage() {
                         <div className="pop-browse__status status">
                             <p className="status__p subttl">Статус</p>
                             <div className="status__themes">
-                                <div className="status__theme _hide">
-                                    <p>Без статуса</p>
-                                </div>
-                                <div className="status__theme _gray">
-                                    <p className="_gray">Нужно сделать</p>
-                                </div>
-                                <div className="status__theme _hide">
-                                    <p>В работе</p>
-                                </div>
-                                <div className="status__theme _hide">
-                                    <p>Тестирование</p>
-                                </div>
-                                <div className="status__theme _hide">
-                                    <p>Готово</p>
-                                </div>
+
+                                {isEditing ? statusList.map((el) => <div key={el} onClick={() => setCurrentStatus(el)} className={currentStatus === el ?"status__theme _gray" : "status__theme"}><p className={currentStatus === el ?"_gray" : ""}>{el}</p></div> )
+                                    : <div className="status__theme">
+                                        <p>{currentStatus}</p>
+                                    </div>}
+                                {/* (
+                                        <>
+                                           <div className="status__theme">
+                                                <p className="_gray">Без статуса</p>
+                                            </div>
+                                             <div className="status__theme _gray">
+                                                <p className="_gray">Нужно сделать</p>
+                                            </div>
+                                            <div className="status__theme">
+                                                <p>В работе</p>
+                                            </div>
+                                            <div className="status__theme">
+                                                <p>Тестирование</p>
+                                            </div>
+                                            <div className="status__theme">
+                                                <p>Готово</p>
+                                            </div>
+                                        </>
+                                    ) */}
                             </div>
                         </div>
                         <PopBrowseWrap>
@@ -124,13 +137,30 @@ function CardBrowsePage() {
                                 id="formBrowseCard"
                                 action="#"
                             >
-                                <FormBrowseBlock className={`${isEditing ? '' : '_hide'}`}>
+                                {
+                                    isEditing ? <FormBrowseBlock>
+                                      <label htmlFor="textArea01" className="subttl">
+                                          Описание задачи
+                                      </label>
+                                      <textarea
+                                        className="form-browse__area"
+                                        name="description"
+                                        id="textArea01"
+                                        readOnly=""
+                                        placeholder="Введите описание задачи..."
+                                        disabled={!isEditing}
+                                        value={editedTask.description}
+                                        onChange={handleInputChange}
+                                      />
+                                  </FormBrowseBlock> : <div>{currentCard?.description}</div>
+                                }
+                                {/* <FormBrowseBlock className={`${isEditing ? '' : '_hide'}`}>
                                     <label htmlFor="textArea01" className="subttl">
                                         Описание задачи
                                     </label>
                                     <textarea
                                         className="form-browse__area"
-                                        name="text"
+                                        name="description"
                                         id="textArea01"
                                         readOnly=""
                                         placeholder="Введите описание задачи..."
@@ -138,7 +168,7 @@ function CardBrowsePage() {
                                         value={editedTask.description}
                                         onChange={handleInputChange}
                                     />
-                                </FormBrowseBlock>
+                                </FormBrowseBlock> */}
                             </form>
                             <div className={`${isEditing ? '_hide' : ''}`}>
                                 <Calendar selected={selected} readOnly />
@@ -147,12 +177,12 @@ function CardBrowsePage() {
                                 <Calendar selected={selected} setSelected={setSelected} />
                             </div>
                         </PopBrowseWrap>
-                        <div className="theme-down__categories theme-down">
+                        {/* <div className="theme-down__categories theme-down">
                             <p className="categories__p subttl">Категория</p>
                             <div className="categories__theme _orange _active-category">
                                 <p className="_orange">Web Design</p>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={`pop-browse__btn-browse ${isEditing ? '_hide' : ''}`}>
 
                             <div className="btn-group">

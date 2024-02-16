@@ -13,7 +13,7 @@ import { useTasks } from '../hooks/useTasks.jsx';
 function MainPage() {
 
   const { userData } = useUser();
-  // const [cards, setCards] = useState(null);
+
   const {userTasks, setUserTasks} = useTasks();
   const [cardsError, setCardsError] = useState(null);
 
