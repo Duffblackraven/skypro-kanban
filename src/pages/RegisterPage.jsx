@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AppRoutes } from '../lib/appRoutes';
-import { Button, ModalFormGroupLink, ModalFormGroupText, ModalTtl } from "../components/Common/Common.styled";
+import { Button, ErrorText, ModalBtnErr, ModalFormGroupLink, ModalFormGroupText, ModalTtl } from "../components/Common/Common.styled";
 import { LogInRegisterDIV, LogInRegisterBox, Modal, ModalBlock, ModalForm, ModalFormGroup, ModalInput } from "../components/Common/Common.styled";
 import { register } from "../api";
 import { useState } from "react";
@@ -17,24 +17,38 @@ function RegisterPage() {
     };
     const [registerData, setRegisterData] = useState(registerForm);
     const [registerDataLoading, setRegisterDataLoading] = useState(false);
-    const [registerFormError, setRegisterFormError] = useState(null);
+    const [regError, setRegError] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setRegisterDataLoading(true);
+        try {
+            if (registerData.name === '' || registerData.login === '' || registerData.password === '') {
 
-        await register(registerData)
-            .then((data) => {
-                console.log(data);
-                console.log(data.user);
-                loginUser(data.user)
-            })
-            .catch((error) => {
-                setRegisterFormError(error.message)
-            })
-            .finally(() => {
-                setRegisterDataLoading(false);
-            })
+                setRegError(true);
+                throw new Error(`Введенные вами данные не корректны.
+            Чтобы завершить регистрацию, заполните все поля в форме`);
+            }
+            await register(registerData)
+                .then((data) => {
+                    console.log(data);
+                    console.log(data.user);
+                    loginUser(data.user)
+                });
+
+        } catch (error) {
+            setRegError(error.message);
+            setRegisterDataLoading(false);
+            setTimeout(() => {
+                setRegError(false);
+            }, 4000);
+        }
+        // .catch((error) => {
+        //     setRegisterFormError(error.message)
+        // })
+        // .finally(() => {
+        //     setRegisterDataLoading(false);
+        // })
     };
 
     const handleInputChange = (e) => {
@@ -56,7 +70,7 @@ function RegisterPage() {
                             <ModalInput className="modal__input"
                                 type="text"
                                 id="formusername"
-                                placeholder="Username"
+                                placeholder="Имя"
                                 value={registerData.name}
                                 onChange={handleInputChange}
                                 name="name"
@@ -65,7 +79,7 @@ function RegisterPage() {
                             <ModalInput className="modal__input"
                                 type="text"
                                 id="formlogin"
-                                placeholder="Login"
+                                placeholder="Эл. почта"
                                 value={registerData.login}
                                 onChange={handleInputChange}
                                 name="login"
@@ -74,21 +88,36 @@ function RegisterPage() {
                             <ModalInput className="modal__input"
                                 type="password"
                                 id="formpassword"
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 value={registerData.password}
                                 onChange={handleInputChange}
                                 name="password"
                                 label="Password"
                             />
-                            <div style={{ color: 'darksalmon', width: '305px', textAlign: 'center' }}>{registerFormError}</div>
+                            {regError ? (
+                                <>
+                                    <ErrorText>{regError}</ErrorText>
+                                    <ModalBtnErr
+                                        disabled
+                                        id="btnEnter"
+                                        onClick={handleRegister}
+                                    >
+                                        Зарегистрироваться
+                                    </ModalBtnErr>
+                                </>
+                            ) : (
+                                <Button id="btnEnter" onClick={handleRegister}>{registerDataLoading ? 'Регистрируем пользователя' : 'Зарегистрироваться'}
+                            </Button>  
+                            )}
+                            {/* <div style={{ color: 'darksalmon', width: '305px', textAlign: 'center' }}>{registerFormError}</div> */}
 
                             {/* <ModalBtnEnterLink>
                                 <Link to={AppRoutes.MAIN} disabled={registerDataLoading} onClick={handleRegister}>{registerDataLoading ? 'Регистрируем пользователя' : 'Зарегистрироваться'}</Link>
                             </ModalBtnEnterLink> */}
-                            <Button id="btnEnter"
+                            {/* <Button id="btnEnter"
                                 disabled={registerDataLoading}
                                 onClick={handleRegister}>{registerDataLoading ? 'Регистрируем пользователя' : 'Зарегистрироваться'}
-                            </Button>
+                            </Button> */}
 
                             <ModalFormGroup>
                                 <ModalFormGroupText> Уже есть аккаунт?

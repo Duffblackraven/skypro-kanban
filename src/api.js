@@ -11,7 +11,8 @@ export async function login({ login, password }) {
         }),
     }).then((response) => {
         if (response.status === 400) {
-            throw new Error(`Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.`);
+            // throw new Error(`Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.`);
+            throw new Error(`Ошибка ввода данных`);
         }
         return response.json();
     });
