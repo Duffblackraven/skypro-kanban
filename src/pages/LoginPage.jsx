@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { AppRoutes } from '../lib/appRoutes';
-import Button, { ModalFormGroupLink, ModalFormGroupText, ModalTtl } from "../components/Common/Common.styled"
+import { Button, ModalFormGroupLink, ModalFormGroupText, ModalTtl } from "../components/Common/Common.styled"
 import { LogInRegisterDIV, LogInRegisterBox, Modal, ModalBlock, ModalForm, ModalFormGroup, ModalInput } from "../components/Common/Common.styled"
 import { useState } from "react";
 import { login } from "../api";
@@ -16,6 +16,7 @@ function LoginPage() {
     };
     const [loginData, setLoginData] = useState(loginForm);
     const [loginDataLoading, setLoginDataLoading] = useState(false);
+    const [loginError, setLoginError] = useState(null);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,8 +28,9 @@ function LoginPage() {
             loginUser(data.user)
         })
             .catch((error) => {
-                alert(error);
-                console.warn(error)
+                // alert(error);
+                // console.warn(error)
+                setLoginError(error.message)
             })
             .finally(() => {
                 setLoginDataLoading(false);
@@ -71,7 +73,8 @@ function LoginPage() {
                                 name="password"
                                 label="Password"
                             />
-
+                            <div style={{ color: 'darksalmon', width: '305px', textAlign: 'center' }}>{loginError}</div>
+                            
                             <Button id="btnEnter" onClick={handleLogin}>{loginDataLoading ? 'Входим в приложение' : 'Войти'}</Button>
 
                             <ModalFormGroup>

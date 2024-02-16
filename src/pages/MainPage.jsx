@@ -18,7 +18,6 @@ function MainPage() {
   const [cardsError, setCardsError] = useState(null);
 
   const [isLoaded, setIsLoaded] = useState(true);
-  
   useEffect(() => {
     getTasks({ token: userData.token })
       .then((data) => {

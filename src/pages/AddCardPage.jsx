@@ -8,6 +8,7 @@ import { AppRoutes } from "../lib/appRoutes";
 import { TasksContext } from "../contexts/tasks.jsx";
 import { useUser } from '../hooks/useUser.jsx';
 import { useTasks } from "../hooks/useTasks.jsx";
+import { PopBrowseWrap } from "./CardPage.styled.js";
 
 
 
@@ -18,7 +19,7 @@ export default function AddCardPage() {
 
     const { returnUserTasks } = useTasks();
     const { setUserTasks } = useContext(TasksContext);
-    
+
 
     const [error, setError] = useState(null);
 
@@ -41,19 +42,20 @@ export default function AddCardPage() {
     const addCard = async () => {
 
         let newCard = {
-            ...newTask, date: selected
+            ...newTask, data: selected
         }
         console.log(newCard);
 
         addTask({ token: userData.token, taskData: newTask })
 
-        .then((tasks) => {
-            setUserTasks(tasks.tasks);
-            returnUserTasks()
-        })
-        .catch((error) => {
-            setError(error.message);
-        })
+            .then((tasks) => {
+                setUserTasks(tasks.tasks);
+                returnUserTasks()
+            })
+            .catch((error) => {
+                setError(error.message);
+                // setError(``)
+            })
 
     };
 
@@ -64,8 +66,8 @@ export default function AddCardPage() {
     }, [selected])
 
     return (
-        <div className="pop-browse" id="popBrowse">
-            
+        <PopBrowseWrap id="popBrowse">
+
             <div className="pop-new-card__container">
                 <div className="pop-new-card__block">
                     <div className="pop-new-card__content">
@@ -189,12 +191,13 @@ export default function AddCardPage() {
                             <button onClick={addCard} className="btn-browse__close _btn-bg _hover01">
                                 Создать задачу
                             </button>
-                            {error && <p>{error}</p>}
+                            {/* {error && <p>{error}</p>} */}
                             {/* </Link> */}
 
                         </div>
+                        <p style={{ color: 'darksalmon' }}>{error}</p>
 
-                        <div className="pop-browse__btn-edit _hide">
+                        {/* <div className="pop-browse__btn-edit _hide">
                             <div className="btn-group">
                                 <button className="btn-edit__edit _btn-bg _hover01">
                                     <a href="#">Сохранить</a>
@@ -212,15 +215,15 @@ export default function AddCardPage() {
 
                             <Link to={AppRoutes.MAIN}>
                                 <button className="btn-edit__close _btn-bg _hover01">
-                                    Close
+                                    Закрыть
                                 </button>
                             </Link>
 
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
             </div>
-        </div>
+        </PopBrowseWrap>
     )
 }
