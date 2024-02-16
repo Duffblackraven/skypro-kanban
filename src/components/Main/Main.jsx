@@ -21,7 +21,7 @@ function Main({ cardList, isLoaded }) {
                             <Column
                                 key={status}
                                 title={status}
-                                cardList={cardList.filter((card) => card.status === status)} />
+                                cardList={cardList?.filter((card) => card.status === status)} />
                         ))
                     }
 

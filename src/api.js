@@ -67,13 +67,14 @@ export async function addTask({ token, taskData}) {
         },
         body: JSON.stringify(taskData),
     })
-        .then((response) => {
-            if (response.status === 400) {
-                throw new Error("Ошибка на сервере");
-            } else {
-                return response.json()
-            }
-        })
+    .then(async(response) => {
+        if (response.status === 400) {
+            const errorMessage = await response.json()
+            throw new Error(errorMessage.error);
+        } else {
+            return response.json()
+        }
+    })
 }
 
 export async function deleteTask({ id, token }) {

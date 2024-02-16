@@ -6,12 +6,12 @@ export const TasksContext = createContext(null);
 
 export const TasksProvider = ({ children }) => {
 
-    const [userTasks, setUserTasks] = useState();
+    const [userTasks, setUserTasks] = useState(null);
+
 
     let navigate = useNavigate();
 
     const returnUserTasks = () => {
-        console.log('task managed successfully');
         navigate(AppRoutes.MAIN)
     }
 

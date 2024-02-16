@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Calendar } from "../components/Calendar/Calendar";
-import { addTask, getTasks } from "../api";
+import { addTask } from "../api";
 import { AppRoutes } from "../lib/appRoutes";
 
 import { TasksContext } from "../contexts/tasks.jsx";
@@ -15,13 +15,18 @@ export default function AddCardPage() {
 
     const { userData } = useUser();
     const [selected, setSelected] = useState();
+
     const { returnUserTasks } = useTasks();
     const { setUserTasks } = useContext(TasksContext);
+    
+
+    const [error, setError] = useState(null);
 
     const [newTask, setNewTask] = useState({
         title: "",
         topic: "",
         description: "",
+        date: "",
     });
 
     const handleInputChange = (e) => {
@@ -36,24 +41,27 @@ export default function AddCardPage() {
     const addCard = async () => {
 
         let newCard = {
-            ...newTask, data: selected
+            ...newTask, date: selected
         }
         console.log(newCard);
 
-        await addTask({ token: userData.token, taskData: newTask })
+        addTask({ token: userData.token, taskData: newTask })
 
-        getTasks({ token: userData.token })
-            .then((data) => {
-                console.log(data.tasks);
-                setUserTasks(data.tasks);
-            })
-            .then(() => {
-                returnUserTasks();
-            })
-            .catch(() => {
-                throw new Error('Что-то пошло не так');
-            });
+        .then((tasks) => {
+            setUserTasks(tasks.tasks);
+            returnUserTasks()
+        })
+        .catch((error) => {
+            setError(error.message);
+        })
+
     };
+
+    useEffect(() => {
+        setNewTask({
+            ...newTask, date: selected
+        })
+    }, [selected])
 
     return (
         <div className="pop-browse" id="popBrowse">
@@ -181,6 +189,7 @@ export default function AddCardPage() {
                             <button onClick={addCard} className="btn-browse__close _btn-bg _hover01">
                                 Создать задачу
                             </button>
+                            {error && <p>{error}</p>}
                             {/* </Link> */}
 
                         </div>

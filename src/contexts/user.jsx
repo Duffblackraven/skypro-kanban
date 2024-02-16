@@ -5,8 +5,13 @@ import { AppRoutes } from "../lib/appRoutes";
 export const UserContext = createContext(null);
 
 const getUserFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('user'))
-};
+    try {
+        // return JSON.parse(localStorage.getItem('user'))
+        return JSON.parse(localStorage.getItem('user'))
+    } catch {
+        return null
+    }
+}
 
 export const UserProvider = ({ children }) => {
 
