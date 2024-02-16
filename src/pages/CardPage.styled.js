@@ -5,7 +5,7 @@ export const FormBrowseBlock = styled.div`
   flex-direction: column;
 `
 
-export const PopBrowseWrapper = styled.div `
+export const PopBrowseWrapper = styled.div`
   width: 100%;
   height: 100%;
   min-width: 375px;
@@ -16,7 +16,7 @@ export const PopBrowseWrapper = styled.div `
   z-index: 7;
 `
 
-export const PopBrowseContainer = styled.div `
+export const PopBrowseContainer = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -28,7 +28,7 @@ export const PopBrowseContainer = styled.div `
   background: rgba(0, 0, 0, 0.4);
 `
 
-export const PopBrowseBlock = styled.div `
+export const PopBrowseBlock = styled.div`
   display: block;
   margin: 0 auto;
   background-color: #FFFFFF;
@@ -50,3 +50,32 @@ export const PopBrowseWrap = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `
+export const BtnGroup = styled.div`
+  display: flex;
+  align-content: center;
+  gap: 10px;
+  justify-content: center;
+  `
+
+export const BtnBrowseEdit = styled.button`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 0 14px;
+  margin-right: 8px;
+  /* width: 100%; */
+  height: 40px;
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565EEF);
+  outline: none;
+  background: transparent;
+  color: #565EEF;
+  
+  &:hover {
+    background-color: #33399b;
+    color: #FFFFFF;
+  }
+  `

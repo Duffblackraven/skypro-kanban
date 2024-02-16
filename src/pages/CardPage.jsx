@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { TasksContext } from "../contexts/tasks.jsx";
 import { useTasks } from "../hooks/useTasks.jsx";
 import { Calendar } from "../components/Calendar/Calendar.jsx";
-import { FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseWrap, PopBrowseWrapper } from "./CardPage.styled.js";
+import { BtnBrowseEdit, BtnGroup, FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseWrap, PopBrowseWrapper } from "./CardPage.styled.js";
 import { statusList } from "../components/Main/Main.jsx";
 
 
@@ -186,17 +186,25 @@ function CardBrowsePage() {
                         </div> */}
                         <div className={`pop-browse__btn-browse ${isEditing ? '_hide' : ''}`}>
 
-                            <div className="btn-group">
+                            {/* <div className="btn-group">  */}
+                            <BtnGroup>
 
-                                <button onClick={startEditing} className="btn-browse__edit _btn-bor _hover03">
+                                {/* <button onClick={startEditing} className="btn-browse__edit _btn-bor _hover03">
                                     Редактировать задачу
-                                </button>
+                                </button>  */}
+                                <BtnBrowseEdit onClick={startEditing}>
+                                    Редактировать задачу
+                                </BtnBrowseEdit>
 
-                                <button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">
+                                {/* <button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">
                                     Удалить задачу
-                                </button>
+                                </button> */}
+                                <BtnBrowseEdit onClick={deleteCard}>
+                                    Удалить задачу
+                                </BtnBrowseEdit>
 
-                            </div>
+                                {/* </div> */}
+                            </BtnGroup>
 
                             <Link to={AppRoutes.MAIN}>
                                 <button className="btn-browse__close _btn-bg _hover01">
@@ -206,22 +214,17 @@ function CardBrowsePage() {
 
                         </div>
                         <div className={`pop-browse__btn-edit ${isEditing ? '' : '_hide'}`}>
-
-                            <div className="btn-group">
-                                <button onClick={editCard} className="btn-edit__edit _btn-bg _hover01">
-                                    <a href="#">Сохранить</a>
-                                </button>
-                                <button onClick={cancelEditing} className="btn-edit__edit _btn-bor _hover03">
-                                    <a href="#">Отменить</a>
-                                </button>
-                                <button
-                                    className="btn-edit__delete _btn-bor _hover03"
-                                    id="btnDelete"
-                                >
-                                    <a href="#">Удалить задачу</a>
-                                </button>
-                            </div>
-
+                            <BtnGroup>
+                                <BtnBrowseEdit onClick={editCard}>
+                                    Сохранить
+                                </BtnBrowseEdit>
+                                <BtnBrowseEdit onClick={cancelEditing}>
+                                    Отменить
+                                </BtnBrowseEdit>
+                                <BtnBrowseEdit>
+                                    Удалить задачу
+                                </BtnBrowseEdit>
+                            </BtnGroup>
                             <Link to={AppRoutes.MAIN}>
                                 <button className="btn-edit__close _btn-bg _hover01">
                                     Закрыть
