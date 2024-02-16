@@ -42,7 +42,6 @@ function CardBrowsePage() {
     };
 
     const [currentStatus, setCurrentStatus] = useState(currentCard?.status || '');
-
     const [isEditing, setIsEditing] = useState(false);
 
     const startEditing = () => {
@@ -72,7 +71,7 @@ function CardBrowsePage() {
     const editCard = async () => {
 
         let newCard = {
-            ...editedTask, date: selected, status: currentStatus 
+            ...editedTask, date: selected, status: currentStatus
         }
         console.log(newCard);
 
@@ -106,7 +105,7 @@ function CardBrowsePage() {
                             <p className="status__p subttl">Статус</p>
                             <div className="status__themes">
 
-                                {isEditing ? statusList.map((el) => <div key={el} onClick={() => setCurrentStatus(el)} className={currentStatus === el ?"status__theme _gray" : "status__theme"}><p className={currentStatus === el ?"_gray" : ""}>{el}</p></div> )
+                                {isEditing ? statusList.map((el) => <div key={el} onClick={() => setCurrentStatus(el)} className={currentStatus === el ? "status__theme _gray" : "status__theme"}><p className={currentStatus === el ? "_gray" : " "}>{el}</p></div>)
                                     : <div className="status__theme">
                                         <p>{currentStatus}</p>
                                     </div>}
@@ -132,27 +131,29 @@ function CardBrowsePage() {
                             </div>
                         </div>
                         <PopBrowseWrap>
+
                             <form
                                 className="pop-browse__form form-browse"
+                                // className="form-browse__area"
                                 id="formBrowseCard"
                                 action="#"
                             >
                                 {
                                     isEditing ? <FormBrowseBlock>
-                                      <label htmlFor="textArea01" className="subttl">
-                                          Описание задачи
-                                      </label>
-                                      <textarea
-                                        className="form-browse__area"
-                                        name="description"
-                                        id="textArea01"
-                                        readOnly=""
-                                        placeholder="Введите описание задачи..."
-                                        disabled={!isEditing}
-                                        value={editedTask.description}
-                                        onChange={handleInputChange}
-                                      />
-                                  </FormBrowseBlock> : <div>{currentCard?.description}</div>
+                                        <label htmlFor="textArea01" className="subttl">
+                                            Описание задачи
+                                        </label>
+                                        <textarea
+                                            className="form-browse__area"
+                                            name="description"
+                                            id="textArea01"
+                                            readOnly=""
+                                            // placeholder="Введите описание задачи..."
+                                            disabled={!isEditing}
+                                            value={editedTask.description}
+                                            onChange={handleInputChange}
+                                        />
+                                    </FormBrowseBlock> : <div>{currentCard?.description}</div>
                                 }
                                 {/* <FormBrowseBlock className={`${isEditing ? '' : '_hide'}`}>
                                     <label htmlFor="textArea01" className="subttl">

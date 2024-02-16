@@ -20,11 +20,11 @@ function Header({ userData }) {
                         <img src="public/logo.png" alt="logo" />
                     </a>
                 </div>
-                <div className="header__logo _dark">
+                {/* <div className="header__logo _dark">
                     <a href="" target="_self">
                         <img src="public/logo_dark.png" alt="logo" />
                     </a>
-                </div>
+                </div> */}
                 <HeaderNav>
 
                     <Link to={AppRoutes.ADD_CARD}>
