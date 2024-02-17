@@ -79,3 +79,110 @@ export const BtnBrowseEdit = styled.button`
     color: #FFFFFF;
   }
   `
+  export const BtnBrowseDel = styled.button`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 0 14px;
+  margin-right: 8px;
+  height: 40px;
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565EEF);
+  outline: none;
+  border-radius: 4px;
+  background: #565EEF;
+  border: none;
+  color: #FFFFFF;
+  
+  &:hover {
+    background-color: #33399b;
+    color: #FFFFFF;
+  }
+  `
+
+export const FormBrowseArea = styled.textarea`
+  max-width: 370px;
+  width: 100%;
+  outline: none;
+  padding: 14px;
+  background: #EAEEF6;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  margin-top: 14px;
+  height: 200px;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94A6BE;
+    letter-spacing: -0.14px;
+  }
+  `
+
+  export const PopBrowseForm = styled.form`
+  max-width: 370px;
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+  `
+
+  export const PopBrowseTopBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  `
+
+  export const PopBrowseTtl = styled.h3`
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  `
+  export const CategoriesTheme = styled.div`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  white-space: nowrap;
+  `
+
+  export const StatusThemes = styled.div`
+  border-radius: 24px;
+  /* border: 0.7px solid rgba(148, 166, 190, 0.4); */
+  /* color: #94A6BE; */
+  /* padding: 11px 14px 10px; */
+  margin-right: 7px;
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  `
+
+  export const Status = styled.div`
+    margin-bottom: 11px;
+  `
+
+  export const Subttl = styled.div`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  `

@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { TasksContext } from "../contexts/tasks.jsx";
 import { useTasks } from "../hooks/useTasks.jsx";
 import { Calendar } from "../components/Calendar/Calendar.jsx";
-import { BtnBrowseEdit, BtnGroup, FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseWrap, PopBrowseWrapper } from "./CardPage.styled.js";
+import { BtnBrowseDel, BtnBrowseEdit, BtnGroup, CategoriesTheme, FormBrowseArea, FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseForm, PopBrowseTopBlock, PopBrowseTtl, PopBrowseWrap, PopBrowseWrapper, Status, StatusThemes, Subttl } from "./CardPage.styled.js";
 import { statusList } from "../components/Main/Main.jsx";
 
 
@@ -95,15 +95,15 @@ function CardBrowsePage() {
             <PopBrowseContainer>
                 <PopBrowseBlock>
                     <PopBrowseContent>
-                        <div className="pop-browse__top-block">
-                            <h3 className="pop-browse__ttl">{currentCard?.title}</h3>
-                            <div className="categories__theme theme-top _orange _active-category">
-                                <p className="_orange">{currentCard?.topic}</p>
-                            </div>
-                        </div>
-                        <div className="pop-browse__status status">
-                            <p className="status__p subttl">Статус</p>
-                            <div className="status__themes">
+                        <PopBrowseTopBlock>
+                            <PopBrowseTtl>{currentCard?.title}</PopBrowseTtl>
+                            <CategoriesTheme className="theme-top _orange _active-category">
+                                {currentCard?.topic}
+                            </CategoriesTheme>
+                        </PopBrowseTopBlock>
+                        <Status className="pop-browse__status">
+                            <Subttl>Статус</Subttl>
+                            <StatusThemes>
 
                                 {isEditing ? statusList.map((el) => <div key={el} onClick={() => setCurrentStatus(el)} className={currentStatus === el ? "status__theme _gray" : "status__theme"}><p className={currentStatus === el ? "_gray" : " "}>{el}</p></div>)
                                     : <div className="status__theme">
@@ -128,22 +128,27 @@ function CardBrowsePage() {
                                             </div>
                                         </>
                                     ) */}
-                            </div>
-                        </div>
+                            </StatusThemes>
+                        </Status>
+                        <Subttl htmlFor="textArea01">
+                            Описание задачи
+                        </Subttl>
                         <PopBrowseWrap>
-
-                            <form
-                                className="pop-browse__form form-browse"
-                                // className="form-browse__area"
+                            <PopBrowseForm
+                                className="form-browse"
                                 id="formBrowseCard"
-                                action="#"
-                            >
+                                action="#">
                                 {
                                     isEditing ? <FormBrowseBlock>
-                                        <label htmlFor="textArea01" className="subttl">
-                                            Описание задачи
-                                        </label>
-                                        <textarea
+                                        <FormBrowseArea
+                                            name="description"
+                                            id="textArea01"
+                                            readOnly=""
+                                            // placeholder="Введите описание задачи..."
+                                            disabled={!isEditing}
+                                            value={editedTask.description}
+                                            onChange={handleInputChange} />
+                                        {/* <textarea
                                             className="form-browse__area"
                                             name="description"
                                             id="textArea01"
@@ -152,25 +157,10 @@ function CardBrowsePage() {
                                             disabled={!isEditing}
                                             value={editedTask.description}
                                             onChange={handleInputChange}
-                                        />
+                                        /> */}
                                     </FormBrowseBlock> : <div>{currentCard?.description}</div>
                                 }
-                                {/* <FormBrowseBlock className={`${isEditing ? '' : '_hide'}`}>
-                                    <label htmlFor="textArea01" className="subttl">
-                                        Описание задачи
-                                    </label>
-                                    <textarea
-                                        className="form-browse__area"
-                                        name="description"
-                                        id="textArea01"
-                                        readOnly=""
-                                        placeholder="Введите описание задачи..."
-                                        disabled={!isEditing}
-                                        value={editedTask.description}
-                                        onChange={handleInputChange}
-                                    />
-                                </FormBrowseBlock> */}
-                            </form>
+                            </PopBrowseForm>
                             <div className={`${isEditing ? '_hide' : ''}`}>
                                 <Calendar selected={selected} readOnly />
                             </div>
@@ -206,10 +196,10 @@ function CardBrowsePage() {
                                 {/* </div> */}
                             </BtnGroup>
 
-                            <Link to={AppRoutes.MAIN}>
-                                <button className="btn-browse__close _btn-bg _hover01">
+                            <Link to={AppRoutes.MAIN} >
+                                <BtnBrowseDel>
                                     Закрыть
-                                </button>
+                                </BtnBrowseDel>
                             </Link>
 
                         </div>
@@ -226,9 +216,12 @@ function CardBrowsePage() {
                                 </BtnBrowseEdit>
                             </BtnGroup>
                             <Link to={AppRoutes.MAIN}>
-                                <button className="btn-edit__close _btn-bg _hover01">
+                                {/* <button className="btn-edit__close _btn-bg _hover01">
                                     Закрыть
-                                </button>
+                                </button> */}
+                                <BtnBrowseDel>
+                                    Закрыть
+                                </BtnBrowseDel>
                             </Link>
                         </div>
                     </PopBrowseContent>

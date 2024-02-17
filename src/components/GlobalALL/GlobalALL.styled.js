@@ -600,10 +600,10 @@ body {
   display: block;
 }
 .pop-browse__top-block {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 18px; */
 }
 .pop-browse__ttl {
   color: #000;
