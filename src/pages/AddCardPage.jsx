@@ -8,17 +8,37 @@ import { AppRoutes } from "../lib/appRoutes";
 import { TasksContext } from "../contexts/tasks.jsx";
 import { useUser } from '../hooks/useUser.jsx';
 import { useTasks } from "../hooks/useTasks.jsx";
-import { PopBrowseWrap } from "./CardPage.styled.js";
+import { BtnBrowseDel, FormNewBlock, FormNewInput, FormNewInputArea, PopBrowseBtn, PopBrowseContent, PopBrowseForm, PopBrowseTopBlock, PopBrowseTtl, PopBrowseWrap, PopNewCardBlock, PopNewCardContainer, PopNewCardWrap, Status, StatusTheme, StatusThemes, Subttl } from "./CardPage.styled.js";
 
 
 
 export default function AddCardPage() {
+
+    // const categories = [
+    //     {
+    //         id: 'Web Design',
+    //         color: '_orange',
+    //     },
+    //     {
+    //         id: 'Research',
+    //         color: '_green',
+    //     },
+    //     {
+    //         id: 'Copywriting',
+    //         color: '_purple',
+    //     }
+    // ]
 
     const { userData } = useUser();
     const [selected, setSelected] = useState();
 
     const { returnUserTasks } = useTasks();
     const { setUserTasks } = useContext(TasksContext);
+
+    // const [currentCategory, setCurrentCategory] = useState('');
+    // const handleChecked = (id) => {
+    //     setCurrentCategory(id);
+    // }
 
 
     const [error, setError] = useState(null);
@@ -67,80 +87,74 @@ export default function AddCardPage() {
 
     return (
         <PopBrowseWrap id="popBrowse">
-
-            <div className="pop-new-card__container">
-                <div className="pop-new-card__block">
-                    <div className="pop-new-card__content">
-                        <div className="pop-browse__top-block">
-                            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-                        </div>
+            <PopNewCardContainer>
+                <PopNewCardBlock>
+                    <PopBrowseContent>
+                        <PopBrowseTopBlock>
+                            <PopBrowseTtl>Создание задачи</PopBrowseTtl>
+                        </PopBrowseTopBlock>
                         <Link to={AppRoutes.MAIN} className="pop-new-card__close"> ✖ </Link>
 
-                        <div className="pop-new-card__wrap">
+                        <PopNewCardWrap>
+                            <PopBrowseForm
+                                className="form-browse"
+                                id="formBrowseCard"
+                                action="#">
 
-                            <form
+                                {/* <form
                                 className="pop-new-card__form form-browse"
                                 id="formBrowseCard"
                                 action="#"
-                            >
-                                <div className="form-new__block">
-
-                                    <label htmlFor="textArea01" className="subttl">
-                                        Название задачи
-                                    </label>
-                                    <textarea value={newTask.title}
-                                        className="form-new__input"
+                            > */}
+                                <FormNewBlock>
+                                    <Subttl>Название задачи</Subttl>
+                                    <FormNewInput value={newTask.title}
+                                        // className="form-new__input"
                                         name="title"
                                         id="textArea01"
                                         readOnly=""
                                         onChange={handleInputChange}
                                         placeholder="Введите название задачи..."
                                     />
-
-                                    <label htmlFor="textArea01" className="subttl">
-                                        Описание задачи
-                                    </label>
-                                    <textarea value={newTask.description}
-                                        className="form-new__area"
+                                    <Subttl>Описание задачи</Subttl>
+                                    <FormNewInputArea
+                                        value={newTask.description}
+                                        // className="form-new__area"
                                         name="description"
                                         id="textArea01"
                                         readOnly=""
                                         onChange={handleInputChange}
                                         placeholder="Введите описание задачи..."
                                     />
+                                </FormNewBlock>
 
-                                </div>
+                                <Status className="pop-browse__status">
+                                    <Subttl>Категория</Subttl>
+                                    <StatusThemes>
+                                        {/* {categories.map((el) => (
+                                            <CategoriesButton
+                                                key={el.id}
+                                                type='button'
+                                                id={el.id}
+                                                className={`${currentCategory === el.id ? '_selected-category' : ''} ${el.color}`}
+                                                onClick={() => handleChecked(el.id)}
+                                                >
+                                                {el.id}
+                                            </CategoriesButton>
+                                        ))} */}
 
-                                <div className="pop-browse__status status">
-                                    {/* <div className="pop-new-card__categories categories">
-                            <p className="categories__p subttl">Категория</p>
-                            <div className="categories__themes">
-                                <div className="categories__theme _orange _active-category">
-                                    <p className="_orange">Web Design</p>
-                                </div>
-                                <div className="categories__theme _green">
-                                    <p className="_green">Research</p>
-                                </div>
-                                <div className="categories__theme _purple">
-                                    <p className="_purple">Copywriting</p>
-                                </div>
-                            </div>
-                            </div> */}
-                                    <p className="status__p subttl">Категория</p>
-                                    <div className="status__themes">
-
-                                        <div className="status__theme _orange">
+                                        <StatusTheme className="_orange">
                                             <input
                                                 type="radio"
-                                                id="radio1"
+                                                id="radio1
+                                                onChange={handleInputChange}"
                                                 name="topic"
-                                                onChange={handleInputChange}
                                                 value="Web Design"
                                             />
                                             <label htmlFor="radio1">Web Design</label>
-                                        </div>
+                                        </StatusTheme>
 
-                                        <div className="status__theme _green">
+                                        <StatusTheme className="_green">
                                             <input
                                                 type="radio"
                                                 id="radio2"
@@ -148,10 +162,10 @@ export default function AddCardPage() {
                                                 onChange={handleInputChange}
                                                 value="Research"
                                             />
-                                            <label htmlFor="radio2">Research</label>
-                                        </div>
+                                            <label htmlFor="radio1">Research</label>
+                                        </StatusTheme>
 
-                                        <div className="status__theme _purple">
+                                        <StatusTheme className="_purple">
                                             <input
                                                 type="radio"
                                                 id="radio3"
@@ -159,71 +173,29 @@ export default function AddCardPage() {
                                                 onChange={handleInputChange}
                                                 value="Copywriting"
                                             />
-                                            <label htmlFor="radio3">Copywriting</label>
-                                        </div>
+                                            <label htmlFor="radio1">Copywriting</label>
+                                        </StatusTheme>
+                                    </StatusThemes>
+                                </Status>
 
-                                    </div>
-                                </div>
 
-
-                            </form>
+                            </PopBrowseForm>
 
                             <Calendar selected={selected} setSelected={setSelected} />
-                            {/* <div className="calendar__block">
 
-                                <div className="pop-new-card__calendar calendar">
-                                    <Calendar selected={selected} setSelected={setSelected} />
-                                </div>
+                        </PopNewCardWrap>
 
-                            </div> */}
-
-                        </div>
-
-                        <div className="pop-browse__btn-browse ">
+                        <PopBrowseBtn>
 
                             <Link to={AppRoutes.MAIN}>
-                                <button className="btn-browse__close _btn-bg _hover01">
-                                    Отменить
-                                </button>
+                                <BtnBrowseDel>Отменить</BtnBrowseDel>
                             </Link>
-
-                            {/* <Link to={AppRoutes.MAIN} onClick={addCard}> */}
-                            <button onClick={addCard} className="btn-browse__close _btn-bg _hover01">
-                                Создать задачу
-                            </button>
-                            {/* {error && <p>{error}</p>} */}
-                            {/* </Link> */}
-
-                        </div>
+                            <BtnBrowseDel onClick={addCard}>Создать задачу</BtnBrowseDel>
+                        </PopBrowseBtn>
                         <p style={{ color: 'darksalmon' }}>{error}</p>
-
-                        {/* <div className="pop-browse__btn-edit _hide">
-                            <div className="btn-group">
-                                <button className="btn-edit__edit _btn-bg _hover01">
-                                    <a href="#">Сохранить</a>
-                                </button>
-                                <button className="btn-edit__edit _btn-bor _hover03">
-                                    <a href="#">Отменить</a>
-                                </button>
-                                <button
-                                    className="btn-edit__delete _btn-bor _hover03"
-                                    id="btnDelete"
-                                >
-                                    <a href="#">Удалить задачу</a>
-                                </button>
-                            </div>
-
-                            <Link to={AppRoutes.MAIN}>
-                                <button className="btn-edit__close _btn-bg _hover01">
-                                    Закрыть
-                                </button>
-                            </Link>
-
-                        </div> */}
-
-                    </div>
-                </div>
-            </div>
+                    </PopBrowseContent>
+                </PopNewCardBlock>
+            </PopNewCardContainer>
         </PopBrowseWrap>
     )
 }

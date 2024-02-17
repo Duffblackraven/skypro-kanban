@@ -148,16 +148,6 @@ function CardBrowsePage() {
                                             disabled={!isEditing}
                                             value={editedTask.description}
                                             onChange={handleInputChange} />
-                                        {/* <textarea
-                                            className="form-browse__area"
-                                            name="description"
-                                            id="textArea01"
-                                            readOnly=""
-                                            // placeholder="Введите описание задачи..."
-                                            disabled={!isEditing}
-                                            value={editedTask.description}
-                                            onChange={handleInputChange}
-                                        /> */}
                                     </FormBrowseBlock> : <div>{currentCard?.description}</div>
                                 }
                             </PopBrowseForm>
@@ -168,32 +158,15 @@ function CardBrowsePage() {
                                 <Calendar selected={selected} setSelected={setSelected} />
                             </div>
                         </PopBrowseWrap>
-                        {/* <div className="theme-down__categories theme-down">
-                            <p className="categories__p subttl">Категория</p>
-                            <div className="categories__theme _orange _active-category">
-                                <p className="_orange">Web Design</p>
-                            </div>
-                        </div> */}
+
                         <div className={`pop-browse__btn-browse ${isEditing ? '_hide' : ''}`}>
-
-                            {/* <div className="btn-group">  */}
                             <BtnGroup>
-
-                                {/* <button onClick={startEditing} className="btn-browse__edit _btn-bor _hover03">
-                                    Редактировать задачу
-                                </button>  */}
                                 <BtnBrowseEdit onClick={startEditing}>
                                     Редактировать задачу
                                 </BtnBrowseEdit>
-
-                                {/* <button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">
-                                    Удалить задачу
-                                </button> */}
                                 <BtnBrowseEdit onClick={deleteCard}>
                                     Удалить задачу
                                 </BtnBrowseEdit>
-
-                                {/* </div> */}
                             </BtnGroup>
 
                             <Link to={AppRoutes.MAIN} >
@@ -216,9 +189,6 @@ function CardBrowsePage() {
                                 </BtnBrowseEdit>
                             </BtnGroup>
                             <Link to={AppRoutes.MAIN}>
-                                {/* <button className="btn-edit__close _btn-bg _hover01">
-                                    Закрыть
-                                </button> */}
                                 <BtnBrowseDel>
                                     Закрыть
                                 </BtnBrowseDel>
