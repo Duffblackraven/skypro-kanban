@@ -116,6 +116,7 @@ export const FormBrowseArea = styled.textarea`
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  font-family: Roboto;
 
   &::placeholder {
     font-weight: 400;
@@ -186,6 +187,7 @@ export const Subttl = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
+  padding-bottom: 10px;
 `
 
 export const PopNewCardContainer = styled.div`
@@ -206,7 +208,7 @@ export const PopNewCardBlock = styled.div`
   background-color: #FFFFFF;
   max-width: 630px;
   width: 100%;
-  padding: 40px 30px 48px;
+  padding: 40px 30px 28px;
   border-radius: 10px;
   border: 0.7px solid #D4DBE5;
   position: relative;
@@ -237,6 +239,7 @@ export const FormNewInput = styled.textarea`
   line-height: 1;
   letter-spacing: -0.14px;
   margin: 20px 0;
+  font-family: Roboto;
 
   &::placeholder{
     font-weight: 400;
@@ -261,6 +264,7 @@ export const FormNewInputArea = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
+  font-family: Roboto;
 
   &::placeholder{
     font-weight: 400;
