@@ -9,7 +9,7 @@ export const CardItem = styled.div`
     animation-timing-function: linear;
 
     @media (max-width: ${breakpoints.md}px) {
-        background: red;
+        
     }
 `
 export const CardContainer = styled.div`

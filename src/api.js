@@ -11,7 +11,8 @@ export async function login({ login, password }) {
         }),
     }).then((response) => {
         if (response.status === 400) {
-            throw new Error("Ошибка, попробуйте ввести другие данные");
+            // throw new Error(`Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.`);
+            throw new Error(`Ошибка ввода данных`);
         }
         return response.json();
     });
@@ -27,9 +28,18 @@ export async function register({ login, name, password }) {
             password,
         }),
     })
+        // .then(async(response) => {
+        //     if (response.status === 400) {
+        //         const errorMessage = await response.json()
+        //         throw new Error(errorMessage.error);
+        //     } else {
+        //         return response.json()
+        //     }
+        // })
         .then((response) => {
             if (response.status === 400) {
-                throw new Error("Ошибка, попробуйте ввести другие данные");
+                throw new Error(`Введенные вами данные не корректны.
+                Чтобы завершить регистрацию, заполните все поля в форме`);
             }
             return response.json();
         });
@@ -58,7 +68,7 @@ export async function getTasks({ token }) {
         });
 }
 
-export async function addTask({ token, taskData}) {
+export async function addTask({ token, taskData }) {
 
     return fetch(API_URL, {
         method: 'POST',
@@ -67,14 +77,14 @@ export async function addTask({ token, taskData}) {
         },
         body: JSON.stringify(taskData),
     })
-    .then(async(response) => {
-        if (response.status === 400) {
-            const errorMessage = await response.json()
-            throw new Error(errorMessage.error);
-        } else {
-            return response.json()
-        }
-    })
+        .then(async (response) => {
+            if (response.status === 400) {
+                const errorMessage = await response.json()
+                throw new Error(errorMessage.error);
+            } else {
+                return response.json()
+            }
+        })
 }
 
 export async function deleteTask({ id, token }) {

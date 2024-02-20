@@ -10,32 +10,55 @@ export const Container = styled.div`
         width: 100%;
         padding: 0 16px;
     }
-`;
+`
 
 export const Button = styled.button`
-    height: 30px;
+  width: 80%;
+  height: 30px;
+  background-color: #565EEF;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #FFFFFF;
+
+
+  &:hover {
+    background-color: #33399b;
+  }
+`
+// export const Button = styled.button`
+//     height: 30px;
    
 
-    background-color: ${(col) => {col.$transparent ? 'transparent' : '#565EEF'}};
-    color: ${(col) => {col.$transparent ? '#565EEF' : '#FFFFFF'}};
+//     background-color: ${(col) => {col.$transparent ? 'transparent' : '#565EEF'}};
+//     color: ${(col) => {col.$transparent ? '#565EEF' : '#FFFFFF'}};
 
-    border-radius: 4px;
+//     border-radius: 4px;
 
-    border: ${(col) => {col.$transparent ? '0.7px solid var(--palette-navy-60, #565EEF)' : 'none'}};;
+//     border: ${(col) => {col.$transparent ? '0.7px solid var(--palette-navy-60, #565EEF)' : 'none'}};;
 
-    font-size: 14px;
-    line-height: 1;
-    font-weight: 500;
-    margin: 0px 20px;
-    padding: 0px 10px;
+//     font-size: 14px;
+//     line-height: 1;
+//     font-weight: 500;
+//     margin: 0px 20px;
+//     padding: 0px 10px;
 
 
-    &:hover {
-        background-color: ${(col) => {col.$transparent ? '#33399b' : '#33399b'}};
-        color: #FFFFFF;
-    }`
+//     &:hover {
+//         background-color: ${(col) => {col.$transparent ? '#33399b' : '#33399b'}};
+//         color: #FFFFFF;
+//     }`
 
-export default Button;
+// export default Button;
 
 export const LogInRegisterDIV = styled.div`
     display: flex;
@@ -78,7 +101,7 @@ export const ModalInput = styled.input`
     gap: 10px;
     border-radius: 8px;
     border: 0.7px solid rgba(148, 166, 190, 0.40);
-    color: #94A6BE;
+    color: #000000;
     font-family: Roboto;
     font-size: 14px;
     font-style: normal;
@@ -123,4 +146,79 @@ export const ModalFormGroupLink = styled.div`
   a {
     color: #565EEF;
   }
-`;
+`
+export const ModalBtnEnterLink = styled.div`
+  width: 100%;
+  height: 30px;
+  background-color: #565EEF;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #FFFFFF;
+
+  width: 100%;
+  height: 100%;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #33399b;
+  }
+
+  a {
+    color: #FFFFFF;
+  }
+`
+export const ModalBtnErr = styled.button`
+  width: 100%;
+  height: 30px;
+  background-color: #94a6be;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+
+  a {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: ${breakpoints.sm}px) {
+    height: 40px;
+  }
+`
+
+export const ErrorText = styled.div`
+font-family: Roboto;
+font-size: 12px;
+font-weight: 400;
+line-height: 18px;
+letter-spacing: 0.01em;
+text-align: center;
+color: salmon;
+width: 248px;
+`
